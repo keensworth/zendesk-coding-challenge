@@ -1,7 +1,9 @@
 package zendesk.model;
 
-import java.util.List;
-
+/**
+ * Represents all of the relevant ticket data returned
+ * when requesting a ticket from the Zendesk API
+ */
 public class Ticket {
 
     public Ticket(){};
@@ -10,21 +12,21 @@ public class Ticket {
     boolean allowChannelback;
     boolean hasIncidents;
     boolean isPublic;
-    int assigneeId;
-    int brandId;
-    int forumTopicId;
-    int groupId;
-    int id;
-    int organizationId;
-    int problemId;
-    int requesterId;
-    int submitterId;
-    int ticketFormId;
-    int viaFollowupSourceId;
-    int[] collaboratorIds;
-    int[] emailCcIds;
-    int[] followerIds;
-    int[] followupIds;
+    long assigneeId;
+    long brandId;
+    long forumTopicId;
+    long groupId;
+    long id;
+    long organizationId;
+    long problemId;
+    long requesterId;
+    long submitterId;
+    long ticketFormId;
+    long viaFollowupSourceId;
+    long[] collaboratorIds;
+    long[] emailCcIds;
+    long[] followerIds;
+    long[] followupIds;
     String createdAt;
     String description;
     String dueAt;
