@@ -1,4 +1,4 @@
-package zendesk.util;
+package zendesk.api;
 
 import java.io.*;
 import java.net.HttpURLConnection;
