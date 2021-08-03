@@ -1,4 +1,4 @@
-package zendesk.view;
+package zendesk.util;
 
 public final class ConsoleColors {
     // Reset
