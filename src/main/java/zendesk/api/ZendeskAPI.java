@@ -13,6 +13,7 @@ public class ZendeskAPI {
     private String hostURL;
 
     public String makeGetRequest(String request){
+        System.out.println(request);
         try {
             StringBuilder result = new StringBuilder();
             java.net.URL url = new URL(hostURL + request);
