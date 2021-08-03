@@ -30,7 +30,7 @@ public class Console {
         ansi().eraseScreen();
         ansi().fg(Color.GREEN);
         for (String line : banner){
-            System.console().writer().println(ansi().a(line));
+            System.out.println(ansi().a(line));
         }
         ansi().reset();
     }
@@ -61,49 +61,49 @@ public class Console {
     }
 
     public void printInputQuery(String query){
-        System.console().writer().println(query);
+        System.out.println(query);
     }
 
     public void printError(String errorMsg){
         ansi().fg(Color.RED);
-        System.console().writer().println(ansi().a("ERROR: "));
+        System.out.println(ansi().a("ERROR: "));
         ansi().fg(Color.WHITE);
-        System.console().writer().print(ansi().a(errorMsg));
+        System.out.print(ansi().a(errorMsg));
         ansi().reset();
     }
 
     public void printWarn(String warnMsg){
         ansi().fg(Color.YELLOW);
-        System.console().writer().print(ansi().a(warnMsg));
+        System.out.print(ansi().a(warnMsg));
         ansi().reset();
     }
 
     private void printQueryInput(String input, String prompt){
         ansi().fg(Color.WHITE);
-        System.console().writer().println("    (");
+        System.out.println("    (");
         ansi().fg(Color.YELLOW);
-        System.console().writer().print(ansi().a(input));
+        System.out.print(ansi().a(input));
         ansi().fg(Color.WHITE);
-        System.console().writer().print(") ");
+        System.out.print(") ");
         ansi().reset();
-        System.console().writer().print(ansi().a(prompt));
+        System.out.print(ansi().a(prompt));
     }
 
     public void printExit(){
-        System.console().writer().println("");
-        System.console().writer().println("");
-        System.console().writer().println("");
-        System.console().writer().println("                Thank you for using ZenTicket!");
-        System.console().writer().println("");
-        System.console().writer().println("");
-        System.console().writer().println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("                Thank you for using ZenTicket!");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
     }
 
     private void setColor(String color){
-        System.console().writer().println(color);
+        System.out.println(color);
     }
 
     private void resetColor(){
-        System.console().writer().println(RESET);
+        System.out.println(RESET);
     }
 }
