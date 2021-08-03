@@ -61,7 +61,7 @@ public class Console {
         at.addRule();
         row1.setTextAlignment(TextAlignment.CENTER);
         row2.setTextAlignment(TextAlignment.LEFT);
-        at.getRenderer().setCWC(new CWC_LongestWordMin(new int[]{2, 18, 18, 30, 18, 10}));
+        at.getRenderer().setCWC(new CWC_LongestWordMin(new int[]{3, 18, 18, 30, 18, 10}));
         System.out.println(ansi().a(at.render()));
     }
 
