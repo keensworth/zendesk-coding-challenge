@@ -1,6 +1,8 @@
 package zendesk.model;
 
-import zendesk.util.ZendeskAPI;
+import zendesk.api.Ticket;
+import zendesk.api.TicketFetcher;
+import zendesk.api.ZendeskAPI;
 
 public class TicketManager {
     private final TicketFetcher ticketFetcher;
@@ -43,6 +45,10 @@ public class TicketManager {
             return tickets;
         }
         return null;
+    }
+
+    public boolean hasMoreTickets(){
+        return ticketFetcher.hasMoreTickets();
     }
 
     public Ticket[] getCurrentTicketPage(){
