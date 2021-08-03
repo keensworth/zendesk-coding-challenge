@@ -29,12 +29,12 @@ public class Console {
     }
 
     public void printBanner(){
-        ansi().eraseScreen();
-        ansi().fg(org.fusesource.jansi.Ansi.Color.GREEN);
+        System.out.println(ansi().eraseScreen());
+        System.out.println(ansi().fg(Ansi.Color.GREEN));
         for (String line : banner){
-            System.out.println(ansi().fg(Ansi.Color.RED).a(line));
+            System.out.println(ansi().a(line));
         }
-        ansi().reset();
+        System.out.println(ansi().reset());
     }
 
     public void printBasicQuery(){
@@ -81,14 +81,7 @@ public class Console {
     }
 
     private void printQueryInput(String input, String prompt){
-        ansi().fg(Color.WHITE);
-        System.out.println("    (");
-        ansi().fg(Color.YELLOW);
-        System.out.print(ansi().a(input));
-        ansi().fg(Color.WHITE);
-        System.out.print(") ");
-        ansi().reset();
-        System.out.print(ansi().a(prompt));
+        System.out.println(ansi().fg(Ansi.Color.WHITE).a("(").fg(Ansi.Color.YELLOW).a(input).fg(Ansi.Color.WHITE).a(") ").reset().a(prompt));
     }
 
     public void printExit(){
