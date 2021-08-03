@@ -28,7 +28,7 @@ public class Console {
 
     public void printBanner(){
         ansi().eraseScreen();
-        ansi().fg(Color.GREEN);
+        ansi().fg(org.fusesource.jansi.Ansi.Color.GREEN);
         for (String line : banner){
             System.out.println(ansi().a(line));
         }
