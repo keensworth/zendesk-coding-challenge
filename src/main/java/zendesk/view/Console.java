@@ -1,6 +1,6 @@
 package zendesk.view;
 
-import static zendesk.view.ConsoleColors.*;
+import static zendesk.util.ConsoleColors.*;
 
 public class Console {
     static String[] banner = new String[]{
@@ -41,6 +41,18 @@ public class Console {
         printQueryInput("q", "Quit");
     }
 
+    public void printFirstPageQuery(){
+        printQueryInput("n", "View next page");
+        printQueryInput("t", "Fetch ticket by ID");
+        printQueryInput("q", "Quit");
+    }
+
+    public void printLastPageQuery(){
+        printQueryInput("p", "View previous page");
+        printQueryInput("t", "Fetch ticket by ID");
+        printQueryInput("q", "Quit");
+    }
+
     public void printInputQuery(String query){
         System.console().writer().println(query);
     }
@@ -53,6 +65,12 @@ public class Console {
         resetColor();
     }
 
+    public void printWarn(String warnMsg){
+        setColor(YELLOW);
+        System.console().writer().print(warnMsg);
+        resetColor();
+    }
+
     private void printQueryInput(String input, String prompt){
         setColor(WHITE_BRIGHT);
         System.console().writer().println("    (");
@@ -62,6 +80,16 @@ public class Console {
         System.console().writer().print(") ");
         resetColor();
         System.console().writer().print(prompt);
+    }
+
+    public void printExit(){
+        System.console().writer().println("");
+        System.console().writer().println("");
+        System.console().writer().println("");
+        System.console().writer().println("                Thank you for using ZenTicket!");
+        System.console().writer().println("");
+        System.console().writer().println("");
+        System.console().writer().println("");
     }
 
     private void setColor(String color){
