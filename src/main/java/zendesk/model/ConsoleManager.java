@@ -48,6 +48,8 @@ public class ConsoleManager {
             case AWAITING_PREV_PAGE_STATE -> prevPage();
             case INVALID_BASIC_QUERY_INPUT_STATE -> invalidBasicQueryInput();
             case INVALID_PAGE_QUERY_INPUT_STATE -> invalidPageQueryInput();
+            case INVALID_FIRST_PAGE_QUERY_INPUT_STATE -> invalidFirstPageQueryInput();
+            case INVALID_LAST_PAGE_QUERY_INPUT_STATE -> invalidLastPageQueryInput();
             case INVALID_ID_INPUT_STATE -> invalidIdInput();
         }
         return currentState;
