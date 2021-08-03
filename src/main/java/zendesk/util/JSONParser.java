@@ -13,6 +13,7 @@ import java.util.List;
 public class JSONParser {
 
     public static Ticket parseTicketString(String ticketString){
+        ticketString = ticketString.substring(10, ticketString.length()-1);
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
