@@ -1,7 +1,7 @@
 package zendesk;
 
 import zendesk.model.ConsoleManager;
-import zendesk.util.ZendeskAPI;
+import zendesk.api.ZendeskAPI;
 
 public class Application {
     private final ConsoleManager consoleManager;
