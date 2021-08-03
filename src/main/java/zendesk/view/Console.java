@@ -1,6 +1,8 @@
 package zendesk.view;
 
 import static zendesk.util.ConsoleColors.*;
+
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import zendesk.util.ConsoleColors;
 
@@ -30,7 +32,7 @@ public class Console {
         ansi().eraseScreen();
         ansi().fg(org.fusesource.jansi.Ansi.Color.GREEN);
         for (String line : banner){
-            System.out.println(ansi().a(line));
+            System.out.println(ansi().fg(Ansi.Color.RED).a(line));
         }
         ansi().reset();
     }
