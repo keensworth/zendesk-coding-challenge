@@ -23,11 +23,11 @@ public class Console {
     static String[] banner = new String[]{
             "\n",
             "\n",
-            "                ███████ ███████ ███    ██ ████████ ██  ██████ ██   ██ ███████ ████████",
-            "                   ███  ██      ████   ██    ██    ██ ██      ██  ██  ██         ██   ",
-            "                  ███   █████   ██ ██  ██    ██    ██ ██      █████   █████      ██   ",
-            "                 ███    ██      ██  ██ ██    ██    ██ ██      ██  ██  ██         ██   ",
-            "                ███████ ███████ ██   ████    ██    ██  ██████ ██   ██ ███████    ██   ",
+            "     ______     ______     __   __     ______   __     ______     __  __     ______     ______                                    ",
+            "    /\\___  \\   /\\  ___\\   /\\ '-.\\ \\   /\\__  _\\ /\\ \\   /\\  ___\\   /\\ \\/ /    /\\  ___\\   /\\__  _\\                ",
+            "    \\/_/  /__  \\ \\  __\\   \\ \\ \\-.  \\  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\____  \\ \\  _'-.  \\ \\  __\\   \\/_/\\ \\/          ",
+            "      /\\_____\\  \\ \\_____\\  \\ \\_\\\\'\\_\\    \\ \\_\\  \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_____\\    \\ \\_\\    ",
+            "      \\/_____/   \\/_____/   \\/_/ \\/_/     \\/_/   \\/_/   \\/_____/   \\/_/\\/_/   \\/_____/     \\/_/                        ",
             "\n",
             "\n"
     };
@@ -61,7 +61,7 @@ public class Console {
         at.addRule();
         row1.setTextAlignment(TextAlignment.CENTER);
         row2.setTextAlignment(TextAlignment.LEFT);
-        at.getRenderer().setCWC(new CWC_LongestWordMin(new int[]{3, 18, 18, 30, 16, 10}));
+        at.getRenderer().setCWC(new CWC_LongestWordMin(new int[]{2, 18, 18, 30, 18, 10}));
         System.out.println(ansi().a(at.render()));
     }
 
@@ -140,9 +140,9 @@ public class Console {
     private String formatTags(String[] tags){
         StringBuilder out = new StringBuilder();
         for (String tag : tags){
-            out.append(tag).append(",");
+            out.append(tag).append(", ");
         }
-        return out.deleteCharAt(out.length() - 1).toString();
+        return out.substring(0, out.length()-2);
     }
 
     private void setColor(String color){
