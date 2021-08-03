@@ -9,7 +9,7 @@ public class Application {
 
     public Application(){
         ZendeskAPI zendeskAPI = new ZendeskAPI();
-        zendeskAPI.setCredentials("config.properties");
+        zendeskAPI.setCredentials("/config.properties");
 
         consoleManager = new ConsoleManager(zendeskAPI);
     }
