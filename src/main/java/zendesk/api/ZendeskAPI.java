@@ -56,6 +56,7 @@ public class ZendeskAPI {
             String rawAuthorization = email + "/token:" + token;
             encryptedAuth = Base64.getEncoder().encodeToString(rawAuthorization.getBytes());
             hostURL = "https://" + subdomain + ".zendesk.com";
+            System.out.println(hostURL);
         } catch (FileNotFoundException e){
             System.out.println("config.properties not found!");
         }
