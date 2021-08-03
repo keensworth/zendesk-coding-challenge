@@ -42,7 +42,9 @@ public class ZendeskAPI {
 
     public void setCredentials(String configPath){
         try {
+            System.out.println("1");
             Scanner scanner = new Scanner(new File(configPath));
+            System.out.println("2");
             String email = "";
             String token = "";
             String subdomain = "";
