@@ -5,7 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import zendesk.model.Ticket;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import zendesk.api.Ticket;
 
 import java.util.List;
 
@@ -30,7 +31,8 @@ public class JSONParser {
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
             List<Ticket> ticketList = objectMapper.readValue(ticketArrayString, new TypeReference<>() {
             });
-            return (Ticket[]) ticketList.toArray();
+            Ticket[] ticketArray = new Ticket[ticketList.size()];
+            return ticketList.toArray(ticketArray);
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
@@ -39,40 +41,54 @@ public class JSONParser {
 
     public static String getNextTicketPageRequest(String json){
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode array = objectMapper.readValue(json, JsonNode.class);
-            JsonNode object = array.get(1);
-            String nextURL = object.get("next").textValue();
-            return getURLPath(nextURL);
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode node = mapper.readValue(json, ObjectNode.class);
+            JsonNode jNode = node.get("links");
+            jNode = jNode.get("next");
+            return getURLPath(jNode.asText());
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
-        return null;
+        return "NULL";
     }
 
     public static String getPrevTicketPageRequest(String json){
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode array = objectMapper.readValue(json, JsonNode.class);
-            JsonNode object = array.get(1);
-            String prevURL = object.get("prev").textValue();
-            return getURLPath(prevURL);
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode node = mapper.readValue(json, ObjectNode.class);
+            JsonNode jNode = node.get("links");
+            jNode = jNode.get("prev");
+            return getURLPath(jNode.asText());
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
-        return null;
+        return "NULL";
     }
 
     public static boolean hasMoreTickets(String json){
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode array = objectMapper.readValue(json, JsonNode.class);
-            JsonNode object = array.get(1);
-            return object.get("has_more").booleanValue();
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode node = mapper.readValue(json, ObjectNode.class);
+            JsonNode jNode = node.get("meta");
+            jNode = jNode.get("has_more");
+            return Boolean.parseBoolean(jNode.asText());
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static String parseUserStringForName(String json){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectNode node = mapper.readValue(json, ObjectNode.class);
+            JsonNode jNode = node.get("user");
+            jNode = jNode.get("name");
+            return (jNode.asText());
+        } catch (JsonProcessingException e){
+            e.printStackTrace();
+        }
+        return "NULL";
     }
 
     private static String getURLPath(String url){
