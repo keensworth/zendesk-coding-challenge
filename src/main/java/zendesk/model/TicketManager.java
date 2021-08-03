@@ -1,12 +1,15 @@
 package zendesk.model;
 
+import zendesk.util.ZendeskAPI;
+
 public class TicketManager {
-    private TicketFetcher ticketFetcher;
+    private final TicketFetcher ticketFetcher;
     private Ticket[] currentTicketPage;
     private Ticket currentTicket;
     private int pageNum;
 
-    public TicketManager(){
+    public TicketManager(ZendeskAPI zendeskAPI){
+        this.ticketFetcher = new TicketFetcher(zendeskAPI);
         pageNum = 1;
     }
 
