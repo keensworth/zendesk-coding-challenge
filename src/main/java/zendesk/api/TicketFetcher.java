@@ -68,8 +68,8 @@ public class TicketFetcher {
 
     private void fetchUsernamesFromIds(Ticket... tickets){
         for (Ticket ticket : tickets){
-            ticket.assigneeName = userFetcher.fetchNameFromId(ticket.assigneeId);
-            ticket.requesterName = userFetcher.fetchNameFromId(ticket.requesterId);
+            ticket.assigneeName = userFetcher.fetchNameFromId(ticket.assignee_id);
+            ticket.requesterName = userFetcher.fetchNameFromId(ticket.requester_id);
         }
     }
 }
