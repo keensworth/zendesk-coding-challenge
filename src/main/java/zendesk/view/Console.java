@@ -5,6 +5,7 @@ import static zendesk.util.ConsoleColors.*;
 
 import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
+import de.vandermeer.asciitable.CWC_FixedWidth;
 import de.vandermeer.asciitable.CWC_LongestWordMin;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import org.fusesource.jansi.Ansi;
@@ -23,11 +24,11 @@ public class Console {
     static String[] banner = new String[]{
             "",
             "",
-            "     ______     ______     __   __     ______   __     ______     __  __     ______     ______                                    ",
-            "    /\\___  \\   /\\  ___\\   /\\ '-.\\ \\   /\\__  _\\ /\\ \\   /\\  ___\\   /\\ \\/ /    /\\  ___\\   /\\__  _\\                ",
-            "    \\/_/  /__  \\ \\  __\\   \\ \\ \\-.  \\  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\____  \\ \\  _'-.  \\ \\  __\\   \\/_/\\ \\/          ",
-            "      /\\_____\\  \\ \\_____\\  \\ \\_\\\\'\\_\\    \\ \\_\\  \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_____\\    \\ \\_\\    ",
-            "      \\/_____/   \\/_____/   \\/_/ \\/_/     \\/_/   \\/_/   \\/_____/   \\/_/\\/_/   \\/_____/     \\/_/                        ",
+            "        ______     ______     __   __     ______   __     ______     __  __     ______     ______        ",
+            "       /\\___  \\   /\\  ___\\   /\\ '-.\\ \\   /\\__  _\\ /\\ \\   /\\  ___\\   /\\ \\/ /    /\\  ___\\   /\\__  _\\                ",
+            "       \\/_/  /__  \\ \\  __\\   \\ \\ \\-.  \\  \\/_/\\ \\/ \\ \\ \\  \\ \\ \\____  \\ \\  _'-.  \\ \\  __\\   \\/_/\\ \\/          ",
+            "         /\\_____\\  \\ \\_____\\  \\ \\_\\\\'\\_\\    \\ \\_\\  \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_____\\    \\ \\_\\    ",
+            "         \\/_____/   \\/_____/   \\/_/ \\/_/     \\/_/   \\/_/   \\/_____/   \\/_/\\/_/   \\/_____/     \\/_/                        ",
             "",
             ""
     };
@@ -61,7 +62,7 @@ public class Console {
         at.addRule();
         row1.setTextAlignment(TextAlignment.CENTER);
         row2.setTextAlignment(TextAlignment.LEFT);
-        at.getRenderer().setCWC(new CWC_LongestWordMin(new int[]{3, 18, 18, 30, 18, 10}));
+        at.getRenderer().setCWC(new CWC_FixedWidth().add(3).add(18).add(18).add(30).add(18).add(10));
         System.out.println(ansi().a(at.render()));
     }
 
