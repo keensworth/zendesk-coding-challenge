@@ -1,31 +1,38 @@
 package zendesk.view;
 
 import static zendesk.util.ConsoleColors.*;
+import org.fusesource.jansi.AnsiConsole;
+import zendesk.util.ConsoleColors;
+
+import static org.fusesource.jansi.Ansi.*;
+import static org.fusesource.jansi.Ansi.Color.*;
 
 public class Console {
     static String[] banner = new String[]{
             "\n",
             "\n",
             "\n",
-            "        ███████╗███████╗███╗   ██╗████████╗██╗ ██████╗██╗  ██╗███████╗████████╗",
-            "        ╚══███╔╝██╔════╝████╗  ██║╚══██╔══╝██║██╔════╝██║ ██╔╝██╔════╝╚══██╔══╝",
-            "          ███╔╝ █████╗  ██╔██╗ ██║   ██║   ██║██║     █████╔╝ █████╗     ██║   ",
-            "         ███╔╝  ██╔══╝  ██║╚██╗██║   ██║   ██║██║     ██╔═██╗ ██╔══╝     ██║   ",
-            "        ███████╗███████╗██║ ╚████║   ██║   ██║╚██████╗██║  ██╗███████╗   ██║   ",
-            "        ╚══════╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝   ",
+            "███████ ███████ ███    ██ ████████ ██  ██████ ██   ██ ███████ ████████",
+            "   ███  ██      ████   ██    ██    ██ ██      ██  ██  ██         ██   ",
+            "  ███   █████   ██ ██  ██    ██    ██ ██      █████   █████      ██   ",
+            " ███    ██      ██  ██ ██    ██    ██ ██      ██  ██  ██         ██   ",
+            "███████ ███████ ██   ████    ██    ██  ██████ ██   ██ ███████    ██   ",
             "\n",
             "\n",
             "\n"
     };
 
-    public Console(){ }
+    public Console(){
+        AnsiConsole.systemInstall();
+    }
 
     public void printBanner(){
-        setColor(GREEN);
+        ansi().eraseScreen();
+        ansi().fg(Color.GREEN);
         for (String line : banner){
-            System.console().writer().println(line);
+            System.console().writer().println(ansi().a(line));
         }
-        resetColor();
+        ansi().reset();
     }
 
     public void printBasicQuery(){
@@ -58,28 +65,28 @@ public class Console {
     }
 
     public void printError(String errorMsg){
-        setColor(RED_BRIGHT);
-        System.console().writer().println("ERROR: ");
-        setColor(WHITE_BRIGHT);
-        System.console().writer().print(errorMsg);
-        resetColor();
+        ansi().fg(Color.RED);
+        System.console().writer().println(ansi().a("ERROR: "));
+        ansi().fg(Color.WHITE);
+        System.console().writer().print(ansi().a(errorMsg));
+        ansi().reset();
     }
 
     public void printWarn(String warnMsg){
-        setColor(YELLOW);
-        System.console().writer().print(warnMsg);
-        resetColor();
+        ansi().fg(Color.YELLOW);
+        System.console().writer().print(ansi().a(warnMsg));
+        ansi().reset();
     }
 
     private void printQueryInput(String input, String prompt){
-        setColor(WHITE_BRIGHT);
+        ansi().fg(Color.WHITE);
         System.console().writer().println("    (");
-        setColor(YELLOW_BRIGHT);
-        System.console().writer().print(input);
-        setColor(WHITE_BRIGHT);
+        ansi().fg(Color.YELLOW);
+        System.console().writer().print(ansi().a(input));
+        ansi().fg(Color.WHITE);
         System.console().writer().print(") ");
-        resetColor();
-        System.console().writer().print(prompt);
+        ansi().reset();
+        System.console().writer().print(ansi().a(prompt));
     }
 
     public void printExit(){
