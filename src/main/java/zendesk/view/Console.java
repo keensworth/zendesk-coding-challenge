@@ -56,7 +56,7 @@ public class Console {
                 ticket.requesterName,
                 ticket.subject,
                 ticket.description,
-                formatTime(ticket.updatedAt),
+                formatTime(ticket.updated_at),
                 formatTags(ticket.tags));
         at.addRule();
         row1.setTextAlignment(TextAlignment.CENTER);
