@@ -43,7 +43,7 @@ public class ZendeskAPI {
     public void setCredentials(String configPath){
         try {
             System.out.println("1");
-            Scanner scanner = new Scanner(new File(configPath));
+            Scanner scanner = new Scanner(this.getClass().getResourceAsStream(configPath));
             System.out.println("2");
             String email = "";
             String token = "";
@@ -60,7 +60,7 @@ public class ZendeskAPI {
             this.encryptedAuth = Base64.getEncoder().encodeToString(rawAuthorization.getBytes());
             this.hostURL = "https://" + subdomain + ".zendesk.com";
             System.out.println(hostURL);
-        } catch (FileNotFoundException e){
+        } catch (Exception e){
             System.out.println("config.properties not found!");
             e.printStackTrace();
         }
