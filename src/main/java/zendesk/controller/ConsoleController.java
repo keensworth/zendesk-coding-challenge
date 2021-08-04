@@ -69,35 +69,35 @@ public class ConsoleController {
     private void parseTextInput(String input, int consoleManagerState){
         if (consoleManagerState == ConsoleManager.BASIC_QUERY_STATE){
             switch (input) {
-                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);//getTicketByID
-                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);//viewAllTickets
-                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);//Quit
-                default -> consoleManager.setState(ConsoleManager.INVALID_BASIC_QUERY_INPUT_STATE);//InvalidInput
+                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);
+                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);
+                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);
+                default -> consoleManager.setState(ConsoleManager.INVALID_BASIC_QUERY_INPUT_STATE);
             }
         } else if (consoleManagerState == ConsoleManager.PAGE_QUERY_STATE){
             switch (input){
-                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);//getTicketByID
-                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);//viewAllTickets
-                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);//Quit
-                case "n" -> consoleManager.setState(ConsoleManager.AWAITING_NEXT_PAGE_STATE);//nextPage
-                case "p" -> consoleManager.setState(ConsoleManager.AWAITING_PREV_PAGE_STATE);//prevPage
-                default -> consoleManager.setState(ConsoleManager.INVALID_PAGE_QUERY_INPUT_STATE);//InvalidInput
+                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);
+                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);
+                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);
+                case "n" -> consoleManager.setState(ConsoleManager.AWAITING_NEXT_PAGE_STATE);
+                case "p" -> consoleManager.setState(ConsoleManager.AWAITING_PREV_PAGE_STATE);
+                default -> consoleManager.setState(ConsoleManager.INVALID_PAGE_QUERY_INPUT_STATE);
             }
         } else if (consoleManagerState == ConsoleManager.FIRST_PAGE_QUERY_STATE){
             switch (input){
-                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);//getTicketByID
-                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);//viewAllTickets
-                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);//Quit
-                case "n" -> consoleManager.setState(ConsoleManager.AWAITING_NEXT_PAGE_STATE);//nextPage
-                default -> consoleManager.setState(ConsoleManager.INVALID_FIRST_PAGE_QUERY_INPUT_STATE);//InvalidInput
+                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);
+                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);
+                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);
+                case "n" -> consoleManager.setState(ConsoleManager.AWAITING_NEXT_PAGE_STATE);
+                default -> consoleManager.setState(ConsoleManager.INVALID_FIRST_PAGE_QUERY_INPUT_STATE);
             }
         } else if (consoleManagerState == ConsoleManager.LAST_PAGE_QUERY_STATE){
             switch (input){
-                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);//getTicketByID
-                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);//viewAllTickets
-                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);//Quit
-                case "p" -> consoleManager.setState(ConsoleManager.AWAITING_PREV_PAGE_STATE);//prevPage
-                default -> consoleManager.setState(ConsoleManager.INVALID_LAST_PAGE_QUERY_INPUT_STATE);//InvalidInput
+                case "t" -> consoleManager.setState(ConsoleManager.AWAITING_TICKET_STATE);
+                case "a" -> consoleManager.setState(ConsoleManager.AWAITING_PAGE_STATE);
+                case "q" -> consoleManager.setState(ConsoleManager.QUIT_STATE);
+                case "p" -> consoleManager.setState(ConsoleManager.AWAITING_PREV_PAGE_STATE);
+                default -> consoleManager.setState(ConsoleManager.INVALID_LAST_PAGE_QUERY_INPUT_STATE);
             }
         }
     }
@@ -113,7 +113,7 @@ public class ConsoleController {
     private void parseNumericInput(int num, int consoleManagerState){
         if (consoleManagerState == ConsoleManager.AWAITING_TICKET_STATE) {
             consoleManager.setTicketId(num);
-            consoleManager.setState(ConsoleManager.FETCHING_TICKET_STATE);//fetchTicket
+            consoleManager.setState(ConsoleManager.FETCHING_TICKET_STATE);
         } else {
             consoleManager.setState(ConsoleManager.INVALID_ID_INPUT_STATE);
         }
