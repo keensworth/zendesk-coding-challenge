@@ -74,11 +74,14 @@ class TicketFetcherTest {
         String response = zendeskAPI.makeGetRequest(INITIAL_TICKET_PAGE_REQUEST);
         String nextTicketPageRequest = JSONParser.getNextTicketPageRequest(response);
         response = zendeskAPI.makeGetRequest(nextTicketPageRequest);
+
         Ticket[] ticketsOriginal = JSONParser.parseTicketArrayString(response);
+
         nextTicketPageRequest = JSONParser.getNextTicketPageRequest(response);
         response = zendeskAPI.makeGetRequest(nextTicketPageRequest);
         String prevTicketPageRequest = JSONParser.getPrevTicketPageRequest(response);
         response = zendeskAPI.makeGetRequest(prevTicketPageRequest);
+
         Ticket[] ticketsNew = JSONParser.parseTicketArrayString(response);
 
         assertEquals(ticketsOriginal, ticketsNew);
