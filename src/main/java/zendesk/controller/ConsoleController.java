@@ -36,7 +36,8 @@ public class ConsoleController {
             input = input.toLowerCase();
 
         } catch(Exception ex) {
-            ex.printStackTrace();
+            System.out.println("You likely just attempted to run this inside of an IDE.");
+            System.out.println("Please follow the setup in the README to run on the command line.");
         }
         parseInput(input, consoleManagerState);
     }
