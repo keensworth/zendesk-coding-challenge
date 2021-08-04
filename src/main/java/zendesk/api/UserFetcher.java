@@ -3,6 +3,7 @@ package zendesk.api;
 import zendesk.util.JSONParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserFetcher {
     private final ZendeskAPI zendeskAPI;
@@ -18,7 +19,7 @@ public class UserFetcher {
         return JSONParser.parseUserStringForName(response);
     }
 
-    public String[] fetchNamesFromIds(ArrayList<Long> ids){
+    public HashMap<Long, String> fetchNamesFromIds(ArrayList<Long> ids){
         StringBuilder idsStringBuilder = new StringBuilder();
         for (long id : ids){
             idsStringBuilder.append(id).append(",");

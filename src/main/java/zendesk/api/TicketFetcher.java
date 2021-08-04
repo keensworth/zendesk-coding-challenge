@@ -3,6 +3,7 @@ package zendesk.api;
 import zendesk.util.JSONParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TicketFetcher {
     private final ZendeskAPI zendeskAPI;
@@ -74,10 +75,10 @@ public class TicketFetcher {
             requesterIds.add(ticket.requester_id);
             System.out.println(ticket.requester_id);
         }
-        String[] requesterNames = userFetcher.fetchNamesFromIds(requesterIds);
+        HashMap<Long,String> requesterNames = userFetcher.fetchNamesFromIds(requesterIds);
         for (int i = 0; i < tickets.length; i++){
             Ticket ticket = tickets[i];
-            ticket.requesterName = requesterNames[i];
+            ticket.requesterName = requesterNames.get(ticket.requester_id);
         }
     }
 }

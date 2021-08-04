@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 import zendesk.api.Ticket;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class JSONParser {
@@ -93,22 +94,22 @@ public class JSONParser {
         return "NULL";
     }
 
-    public static String[] parseUserStringForNames(String json){
+    public static HashMap<Long,String> parseUserStringForNames(String json){
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
             JsonNode node = objectMapper.readTree(json).get("users");
 
-            ArrayList<String> names = new ArrayList<>();
+            HashMap<Long,String> nameIdPairs = new HashMap<>();
 
             for (JsonNode subNode : node){
-                System.out.println(subNode.get("name").asText());
-                names.add(subNode.get("name").asText());
+                String name = subNode.get("name").asText();
+                long id = subNode.get("id").asLong();
+                nameIdPairs.put(id,name);
             }
 
-            String[] userNames = new String[names.size()];
-            return names.toArray(userNames);
+            return nameIdPairs;
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
