@@ -1,6 +1,6 @@
 # Zendesk Coding Challenge
 
-This is a acommand line interface application to access tickets on a Zendesk user's account. It is capable of connecting to the Zendesk API and
+This is a command line interface application to access tickets on a Zendesk user's account. It is capable of connecting to the Zendesk API and
 submitting HTTP requests to retrieve single tickets or a page of tickets (using pagination). 
 Details of the response are given to the user - more detail for single-ticket view, and brief details for page view. This program was written in Java.
 
@@ -17,7 +17,7 @@ Details of the response are given to the user - more detail for single-ticket vi
 > git clone https://github.com/keensworth/zendesk-coding-challenge.git zcc
 ```
 
-2. [IMPORTANT] - Navigate to the following directry and edit the config.properties file to include your Zendesk credentials. This can be done in your file explorer and favored
+2. [IMPORTANT] - Navigate to the following directory and edit the config.properties file to include your Zendesk credentials. This can be done in your file explorer and favored
 text editor.
 ```
 ...\zcc\src\main\resources\config.properties
@@ -90,7 +90,7 @@ and console rendering from the API logic.
 - `TicketManager`: Manages high level calls to the API for ticket retrieval
 
 #### View
-- `Console`: Handles all console printing, including prompts, queires, warnings, errors, and ticket/page display
+- `Console`: Handles all console printing, including prompts, queries, warnings, errors, and ticket/page display
 
 #### Controller
 - `ConsoleController`: Handles all user input and manipulates the state of ConsoleManager
