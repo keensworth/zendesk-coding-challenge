@@ -22,6 +22,11 @@ public class TicketFetcher {
 
     public Ticket fetchTicket(int ticketId){
         String response = zendeskAPI.makeGetRequest(SINGLE_TICKET_REQUEST + ticketId + ".json");
+
+        if (response.equals("ex: FileNotFound")){
+            return null;
+        }
+
         Ticket ticket = JSONParser.parseTicketString(response);
         fetchUsernamesFromIds(ticket);
         return ticket;
@@ -29,6 +34,9 @@ public class TicketFetcher {
 
     public Ticket[] fetchInitialTicketPage(){
         String response = zendeskAPI.makeGetRequest(INITIAL_TICKET_PAGE_REQUEST);
+        if (response.equals("ex: FileNotFound")){
+            return null;
+        }
         updateMeta(response);
         Ticket[] tickets = JSONParser.parseTicketArrayString(response);
         fetchUsernamesFromIds(tickets);
@@ -37,6 +45,9 @@ public class TicketFetcher {
 
     public Ticket[] fetchNextTicketPage(){
         String response = zendeskAPI.makeGetRequest(nextTicketPageRequest);
+        if (response.equals("ex: FileNotFound")){
+            return null;
+        }
         updateMeta(response);
         Ticket[] tickets = JSONParser.parseTicketArrayString(response);
         fetchUsernamesFromIds(tickets);
@@ -45,6 +56,9 @@ public class TicketFetcher {
 
     public Ticket[] fetchPrevTicketPage(){
         String response = zendeskAPI.makeGetRequest(prevTicketPageRequest);
+        if (response.equals("ex: FileNotFound")){
+            return null;
+        }
         updateMeta(response);
         Ticket[] tickets = JSONParser.parseTicketArrayString(response);
         fetchUsernamesFromIds(tickets);

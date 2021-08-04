@@ -1,17 +1,13 @@
 package zendesk.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import zendesk.api.Ticket;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class JSONParser {
 
@@ -23,9 +19,8 @@ public class JSONParser {
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
             return objectMapper.readValue(ticketString, Ticket.class);
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static Ticket[] parseTicketArrayString(String ticketArrayString){
@@ -37,9 +32,8 @@ public class JSONParser {
             Ticket[] tickets = objectMapper.convertValue(node, Ticket[].class);
             return tickets;
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static String getNextTicketPageRequest(String json){
@@ -50,9 +44,8 @@ public class JSONParser {
             jNode = jNode.get("next");
             return getURLPath(jNode.asText());
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return "NULL";
         }
-        return "NULL";
     }
 
     public static String getPrevTicketPageRequest(String json){
@@ -63,9 +56,8 @@ public class JSONParser {
             jNode = jNode.get("prev");
             return getURLPath(jNode.asText());
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return "NULL";
         }
-        return "NULL";
     }
 
     public static boolean hasMoreTickets(String json){
@@ -76,9 +68,8 @@ public class JSONParser {
             jNode = jNode.get("has_more");
             return Boolean.parseBoolean(jNode.asText());
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public static String parseUserStringForName(String json){
@@ -89,9 +80,8 @@ public class JSONParser {
             jNode = jNode.get("name");
             return (jNode.asText());
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return "NULL";
         }
-        return "NULL";
     }
 
     public static HashMap<Long,String> parseUserStringForNames(String json){
@@ -111,9 +101,8 @@ public class JSONParser {
 
             return nameIdPairs;
         } catch (JsonProcessingException e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     private static String getURLPath(String url){

@@ -103,37 +103,52 @@ public class ConsoleManager {
 
     public void fetchTicket(){
         Ticket ticket = ticketManager.getTicket(currentTicketId);
-        console.printTicket(ticket);
+        if (ticket == null){
+            console.printError("Ticket does not exist");
+        } else {
+            console.printTicket(ticket);
+        }
         currentState = BASIC_QUERY_STATE;
     }
 
     public void viewAllTickets(){
         Ticket[] tickets = ticketManager.viewAllTickets();
-        console.printTicketPage(tickets);
-        currentState = FIRST_PAGE_QUERY_STATE;
+        if (tickets==null){
+            console.printError("Error connecting to the ZendeskAPI");
+        } else {
+            console.printTicketPage(tickets);
+            currentState = FIRST_PAGE_QUERY_STATE;
+        }
     }
 
     public void nextPage(){
         Ticket[] tickets = ticketManager.getNextPage();
 
-        console.printTicketPage(tickets);
+        if (tickets==null){
+            console.printError("Error connecting to the ZendeskAPI");
+        } else {
+            console.printTicketPage(tickets);
 
-        if (ticketManager.hasMoreTickets())
-            currentState = PAGE_QUERY_STATE;
-        else
-            currentState = LAST_PAGE_QUERY_STATE;
-
+            if (ticketManager.hasMoreTickets())
+                currentState = PAGE_QUERY_STATE;
+            else
+                currentState = LAST_PAGE_QUERY_STATE;
+        }
     }
 
     public void prevPage(){
         Ticket[] tickets = ticketManager.getPrevPage();
 
-        console.printTicketPage(tickets);
+        if (tickets==null){
+            console.printError("Error connecting to the ZendeskAPI");
+        } else {
+            console.printTicketPage(tickets);
 
-        if (ticketManager.getPageNum() > 1)
-            currentState = PAGE_QUERY_STATE;
-        else
-            currentState = FIRST_PAGE_QUERY_STATE;
+            if (ticketManager.getPageNum() > 1)
+                currentState = PAGE_QUERY_STATE;
+            else
+                currentState = FIRST_PAGE_QUERY_STATE;
+        }
     }
 
     public void invalidBasicQueryInput(){

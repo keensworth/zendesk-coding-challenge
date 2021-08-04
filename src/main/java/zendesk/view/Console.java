@@ -1,12 +1,8 @@
 package zendesk.view;
 
-import static java.time.format.DateTimeFormatter.ofLocalizedDateTime;
-import static zendesk.util.ConsoleColors.*;
-
 import de.vandermeer.asciitable.AT_Row;
 import de.vandermeer.asciitable.AsciiTable;
 import de.vandermeer.asciitable.CWC_FixedWidth;
-import de.vandermeer.asciitable.CWC_LongestWordMin;
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
@@ -14,11 +10,10 @@ import zendesk.api.Ticket;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
-import static org.fusesource.jansi.Ansi.*;
+import static org.fusesource.jansi.Ansi.ansi;
+import static zendesk.util.ConsoleColors.RESET;
 
 public class Console {
     static String[] banner = new String[]{

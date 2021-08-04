@@ -25,16 +25,16 @@ public class ZendeskAPI {
                 for (String line; (line = reader.readLine()) != null; ) {
                     result.append(line);
                 }
+            } catch(FileNotFoundException e){
+                return "ex: FileNotFound";
             }
+
             return result.toString();
 
-        } catch (MalformedURLException e){
-            System.out.println( "NONSENSE");
-            e.printStackTrace();
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e){
+            System.out.println("Error verifying credentials! Please ensure config.properties has been configured correctly.");
+            System.out.println("Then, execute \"mvn package\" and re-run the program.");
+            System.exit(0);
         }
         return null;
     }
@@ -57,8 +57,8 @@ public class ZendeskAPI {
             this.encryptedAuth = Base64.getEncoder().encodeToString(rawAuthorization.getBytes());
             this.hostURL = "https://" + subdomain + ".zendesk.com";
         } catch (Exception e){
-            System.out.println("config.properties not found!");
-            e.printStackTrace();
+            System.out.println("Error verifying credentials! Please ensure config.properties has been configured correctly.");
+            System.out.println("Then, execute \"mvn package\" and re-run the program.");
         }
     }
 }
