@@ -2,6 +2,8 @@ package zendesk.api;
 
 import zendesk.util.JSONParser;
 
+import java.util.ArrayList;
+
 public class TicketFetcher {
     private final ZendeskAPI zendeskAPI;
     private final UserFetcher userFetcher;
@@ -67,11 +69,14 @@ public class TicketFetcher {
     }
 
     private void fetchUsernamesFromIds(Ticket... tickets){
-        System.out.println("BINGUS");
+        ArrayList<Long> requesterIds = new ArrayList<>();
         for (Ticket ticket : tickets){
-            ticket.assigneeName = userFetcher.fetchNameFromId(ticket.assignee_id);
-            ticket.requesterName = userFetcher.fetchNameFromId(ticket.requester_id);
+            requesterIds.add(ticket.requester_id);
         }
-        System.out.println("BUNGUS");
+        String[] requesterNames = userFetcher.fetchNamesFromIds(requesterIds);
+        for (int i = 0; i < tickets.length; i++){
+            Ticket ticket = tickets[i];
+            ticket.requesterName = requesterNames[i];
+        }
     }
 }

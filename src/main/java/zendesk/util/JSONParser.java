@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import zendesk.api.Ticket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JSONParser {
@@ -27,15 +28,12 @@ public class JSONParser {
     }
 
     public static Ticket[] parseTicketArrayString(String ticketArrayString){
-        long start = System.nanoTime();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
             JsonNode node = objectMapper.readTree(ticketArrayString).get("tickets");
             Ticket[] tickets = objectMapper.convertValue(node, Ticket[].class);
-            long end= System.nanoTime();
-            System.out.println((end-start)/1000000000f + " seconds to parse ticket array string");
             return tickets;
         } catch (JsonProcessingException e){
             e.printStackTrace();
@@ -93,6 +91,27 @@ public class JSONParser {
             e.printStackTrace();
         }
         return "NULL";
+    }
+
+    public static String[] parseUserStringForNames(String json){
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+            JsonNode node = objectMapper.readTree(json).get("users");
+
+            ArrayList<String> names = new ArrayList<>();
+
+            for (JsonNode subNode : node){
+                names.add(subNode.get("name").asText());
+            }
+
+            String[] userNames = new String[names.size()];
+            return names.toArray(userNames);
+        } catch (JsonProcessingException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static String getURLPath(String url){
