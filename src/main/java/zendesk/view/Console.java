@@ -62,7 +62,30 @@ public class Console {
         at.addRule();
         row1.setTextAlignment(TextAlignment.CENTER);
         row2.setTextAlignment(TextAlignment.LEFT);
-        at.getRenderer().setCWC(new CWC_FixedWidth().add(3).add(18).add(18).add(30).add(18).add(10));
+        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(18).add(18).add(38).add(22).add(12));
+        System.out.println(ansi().a(at.render()));
+    }
+
+    public void printTicketPage(Ticket[] ticketPage){
+        System.out.println(ansi().eraseScreen());
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        AT_Row row1 = at.addRow("ID", "Requester", "Subject", "Updated", "Tags");
+        at.addRule();
+
+        for (Ticket ticket : ticketPage){
+            AT_Row row = at.addRow(
+                    ticket.id,
+                    ticket.requesterName,
+                    ticket.subject,
+                    formatTime(ticket.updated_at),
+                    formatTags(ticket.tags));
+            at.addRule();
+            row.setTextAlignment(TextAlignment.LEFT);
+        }
+
+        row1.setTextAlignment(TextAlignment.CENTER);
+        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(18).add(18).add(22).add(40));
         System.out.println(ansi().a(at.render()));
     }
 
