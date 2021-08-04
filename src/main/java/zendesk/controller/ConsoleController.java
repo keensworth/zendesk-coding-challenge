@@ -4,13 +4,27 @@ import zendesk.model.ConsoleManager;
 
 import java.io.Console;
 
+/**
+ * ConsoleController is responsible for managing command line input and setting the state
+ * of ConsoleManager. It is called upon by ConsoleManager to accept and verify input.
+ */
 public class ConsoleController {
     private final ConsoleManager consoleManager;
 
+    /**
+     * Constructor for ConsoleController
+     *
+     * @param consoleManager ConsoleManager instance
+     */
     public ConsoleController(ConsoleManager consoleManager){
         this.consoleManager = consoleManager;
     }
 
+    /**
+     * Prompt's the user on the command line for input
+     *
+     * @param prompt prompt for the user to respond to
+     */
     public void promptUser(String prompt){
         int consoleManagerState = consoleManager.getState();
         Console cnsl = null;
@@ -27,6 +41,13 @@ public class ConsoleController {
         parseInput(input, consoleManagerState);
     }
 
+    /**
+     * Parses user input, and calls upon further parsing depending on the
+     * type of input identified
+     *
+     * @param input user input
+     * @param consoleManagerState current state of ConsoleManager
+     */
     private void parseInput(String input, int consoleManagerState){
         try {
             int i = Integer.parseInt(input);
@@ -36,6 +57,14 @@ public class ConsoleController {
         }
     }
 
+    /**
+     * Parses known text input from the user and changes the state of ConsoleManager.
+     * Depending on the current state of ConsoleManager, some input will be rejected
+     * and the user will be re-prompted
+     *
+     * @param input textual user input
+     * @param consoleManagerState current state of ConsoleManager
+     */
     private void parseTextInput(String input, int consoleManagerState){
         if (consoleManagerState == ConsoleManager.BASIC_QUERY_STATE){
             switch (input) {
@@ -72,6 +101,14 @@ public class ConsoleController {
         }
     }
 
+    /**
+     * Parses known text input from the user and changes the state of ConsoleManager.
+     * Depending on the current state of ConsoleManager, some input will be rejected
+     * and the user will be re-prompted
+     *
+     * @param num numeric user input
+     * @param consoleManagerState current state of ConsoleManager
+     */
     private void parseNumericInput(int num, int consoleManagerState){
         if (consoleManagerState == ConsoleManager.AWAITING_TICKET_STATE) {
             consoleManager.setTicketId(num);

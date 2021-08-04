@@ -1,17 +1,28 @@
 package zendesk.api;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Base64;
 import java.util.Scanner;
 
+/**
+ * Zendesk API instance, holding a users encrypted authorization and subdomain information.
+ * This allows a user to set their credentials, and continue to make raw GET requests without
+ * needing to further verify themselves.
+ */
 public class ZendeskAPI {
     private String encryptedAuth;
     private String hostURL;
 
+    /**
+     * Makes a raw GET request, as specified by the input
+     *
+     * @param request relevant API GET command to submit to the Zendesk API
+     * @return JSON String response from Zendesk
+     */
     public String makeGetRequest(String request){
         try {
             StringBuilder result = new StringBuilder();
@@ -39,6 +50,12 @@ public class ZendeskAPI {
         return null;
     }
 
+    /**
+     * Allows a user to set their credentials, and continue to use the API without needing to continuously
+     * authorize themselves.
+     *
+     * @param configPath path to config.properties containing email, API token, and Zendesk subdomain.
+     */
     public void setCredentials(String configPath){
         try {
             Scanner scanner = new Scanner(this.getClass().getResourceAsStream(configPath));

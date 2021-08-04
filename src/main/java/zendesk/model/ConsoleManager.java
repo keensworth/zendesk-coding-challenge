@@ -5,6 +5,11 @@ import zendesk.controller.ConsoleController;
 import zendesk.api.ZendeskAPI;
 import zendesk.view.Console;
 
+/**
+ * ConsoleManager manages the overall state of the program. It calls upon ConsoleController for
+ * input, recieves state changes from ConsoleController, and prompts visual changes to the Console
+ * (such as printing error messages, warning messages, user prompts, queries...)
+ */
 public class ConsoleManager {
     private ConsoleController consoleController;
     private Console console;
@@ -30,10 +35,20 @@ public class ConsoleManager {
     private int currentState = START_STATE;
     private int currentTicketId;
 
+    /**
+     * Constructor for ConsoleManager
+     *
+     * @param zendeskAPI instance of the ZendeskAPI
+     */
     public ConsoleManager(ZendeskAPI zendeskAPI){
         init(zendeskAPI);
     }
 
+    /**
+     * Assesses the current state of ConsoleManager and performs the relevant actions
+     *
+     * @return the current state, which is used by Application to determine when to stop the program
+     */
     public int assessState(){
         switch (currentState){
             case START_STATE -> onStartup();
@@ -56,51 +71,95 @@ public class ConsoleManager {
         return currentState;
     }
 
+    /**
+     * Sets the state
+     *
+     * @param state new state
+     */
     public void setState(int state){
         currentState = state;
     }
 
+    /**
+     * Gets the state
+     *
+     * @return current state
+     */
     public int getState(){
         return currentState;
     }
 
+    /**
+     * Sets the next ticketId to retrieve
+     *
+     * @param ticketId ticket id to retrieve
+     */
     public void setTicketId(int ticketId){
         currentTicketId = ticketId;
     }
 
+    /**
+     * Startup method, prints the banner and establishes the state
+     */
     private void onStartup(){
         console.printBanner();
         currentState = BASIC_QUERY_STATE;
     }
 
+    /**
+     * Prints the basic query and prompts the user for input. This input is
+     * handled by ConsoleController.
+     */
     private void onBasicQuery(){
         console.printBasicQuery();
         consoleController.promptUser("> ");
     }
 
+    /**
+     * Prints the page query and prompts the user for input. This input is
+     * handled by ConsoleController.
+     */
     private void onPageQuery(){
         console.printPageQuery();
         consoleController.promptUser("> ");
     }
 
+    /**
+     * Prints the first page query (no previous page option) and prompts the
+     * user for input. This input is handled by ConsoleController.
+     */
     private void onFirstPageQuery(){
         console.printFirstPageQuery();
         consoleController.promptUser("> ");
     }
 
+    /**
+     * Prints the last page query (no next page option) and prompts the
+     * user for input. This input is handled by ConsoleController.
+     */
     private void onLastPageQuery(){
         console.printLastPageQuery();
         consoleController.promptUser("> ");
     }
 
+    /**
+     * Method called on exit
+     */
     private void onExit(){
         console.printExit();
     }
 
+    /**
+     * Prompts the user to enter a ticket ID
+     */
     public void getTicketByID(){
         consoleController.promptUser("Ticket ID: ");
     }
 
+    /**
+     * Fetches the ticket with id currentTicketId from Zendesk and prints the full
+     * ticket details to the user
+     */
     public void fetchTicket(){
         Ticket ticket = ticketManager.getTicket(currentTicketId);
         if (ticket == null){
@@ -111,6 +170,9 @@ public class ConsoleManager {
         currentState = BASIC_QUERY_STATE;
     }
 
+    /**
+     * Fetches the initial page of tickets from Zendesk and prints the page to the console.
+     */
     public void viewAllTickets(){
         Ticket[] tickets = ticketManager.viewAllTickets();
         if (tickets==null){
@@ -121,6 +183,10 @@ public class ConsoleManager {
         }
     }
 
+    /**
+     * Fetches the next page of tickets from Zendesk with respect to the current page,
+     * and prints the page to the console.
+     */
     public void nextPage(){
         Ticket[] tickets = ticketManager.getNextPage();
 
@@ -136,6 +202,10 @@ public class ConsoleManager {
         }
     }
 
+    /**
+     * Fetches the previous page of tickets from Zendesk with respect to the current page,
+     * and prints the page to the console.
+     */
     public void prevPage(){
         Ticket[] tickets = ticketManager.getPrevPage();
 
@@ -151,6 +221,8 @@ public class ConsoleManager {
         }
     }
 
+    // The following methods are called upon by ConsoleController when an invalid input
+    // is entered.
     public void invalidBasicQueryInput(){
         console.printWarn("Invalid input, please try again.");
         currentState = BASIC_QUERY_STATE;

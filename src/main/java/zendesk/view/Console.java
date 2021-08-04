@@ -13,8 +13,11 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 import static org.fusesource.jansi.Ansi.ansi;
-import static zendesk.util.ConsoleColors.RESET;
 
+/**
+ * Provides access to the console to present information to the user, including prompts,
+ * tables, queries, warnings, and errors
+ */
 public class Console {
     static String[] banner = new String[]{
             "",
@@ -34,6 +37,9 @@ public class Console {
         AnsiConsole.systemInstall();
     }
 
+    /**
+     * Prints the ZenTicket banner
+     */
     public void printBanner(){
         System.out.println(ansi().eraseScreen());
         System.out.println(ansi().fg(Ansi.Color.GREEN));
@@ -43,6 +49,11 @@ public class Console {
         System.out.println(ansi().reset());
     }
 
+    /**
+     * Prints a formatted ticket to the console
+     *
+     * @param ticket Ticket to be formatted and printed
+     */
     public void printTicket(Ticket ticket){
         System.out.println(ansi().eraseScreen());
         AsciiTable at = new AsciiTable();
@@ -63,6 +74,11 @@ public class Console {
         System.out.println(ansi().a(at.render()));
     }
 
+    /**
+     * Prints a Ticket[] as a formatted table to the console
+     *
+     * @param ticketPage Ticket[] to be formatted and printed
+     */
     public void printTicketPage(Ticket[] ticketPage){
         System.out.println(ansi().eraseScreen());
         AsciiTable at = new AsciiTable();
@@ -85,6 +101,9 @@ public class Console {
         System.out.println(ansi().a(at.render()));
     }
 
+    /**
+     * Prints a query containing the basic options
+     */
     public void printBasicQuery(){
         System.out.println(ansi().a(""));
         printQueryInput("t", "Fetch ticket by ID");
@@ -93,6 +112,9 @@ public class Console {
         System.out.println(ansi().a(""));
     }
 
+    /**
+     * Prints a query containing information relevant to viewing pages
+     */
     public void printPageQuery(){
         System.out.println(ansi().a(""));
         printQueryInput("n", "View next page");
@@ -102,6 +124,10 @@ public class Console {
         System.out.println(ansi().a(""));
     }
 
+    /**
+     * Prints a query containing information relevant to being on the first
+     * ticket page
+     */
     public void printFirstPageQuery(){
         System.out.println(ansi().a(""));
         printQueryInput("n", "View next page");
@@ -110,6 +136,10 @@ public class Console {
         System.out.println(ansi().a(""));
     }
 
+    /**
+     * Prints a query containing information relevant to being on the last
+     * ticket page
+     */
     public void printLastPageQuery(){
         System.out.println(ansi().a(""));
         printQueryInput("p", "View previous page");
@@ -118,26 +148,42 @@ public class Console {
         System.out.println(ansi().a(""));
     }
 
-    public void printInputQuery(String query){
-        System.out.println(query);
-    }
-
+    /**
+     * Prints a formatted error message to the console
+     *
+     * @param errorMsg
+     */
     public void printError(String errorMsg){
         System.out.println(ansi().a(""));
         System.out.println(ansi().fg(Ansi.Color.RED).a("ERROR: ").fg(Ansi.Color.WHITE).a(errorMsg).reset());
         System.out.println(ansi().a(""));
     }
 
+    /**
+     * Prints a formatted warning message to the console
+     *
+     * @param warnMsg
+     */
     public void printWarn(String warnMsg){
         System.out.println(ansi().a(""));
         System.out.println(ansi().fg(Ansi.Color.YELLOW).a(warnMsg).reset());
         System.out.println(ansi().a(""));
     }
 
+    /**
+     * Prints a formatted query with input option
+     * ex: (q) Quit
+     *
+     * @param input string indicating input to choose said option
+     * @param prompt string providing information about the choice
+     */
     private void printQueryInput(String input, String prompt){
         System.out.println(ansi().fg(Ansi.Color.WHITE).a("       (").fg(Ansi.Color.YELLOW).a(input).fg(Ansi.Color.WHITE).a(") ").reset().a(prompt));
     }
 
+    /**
+     * Printed on exiting the program
+     */
     public void printExit(){
         System.out.println("");
         System.out.println("");
@@ -148,6 +194,12 @@ public class Console {
         System.out.println("");
     }
 
+    /**
+     * Formats ISO8601 time to a more presentable form
+     *
+     * @param iso8601Time time string adhering to ISO 8601 conventions
+     * @return "MM/dd/yyyy hh:mm a" format of iso8601Time
+     */
     private String formatTime(String iso8601Time){
         DateTimeFormatter formatIn = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
                 .withZone(ZoneId.of("UTC"));
@@ -157,19 +209,17 @@ public class Console {
         return(date.format(formatOut));
     }
 
+    /**
+     * Formats a presented String[] into a comma separated string
+     *
+     * @param tags String[] containing tags
+     * @return comma separated string
+     */
     private String formatTags(String[] tags){
         StringBuilder out = new StringBuilder();
         for (String tag : tags){
             out.append(tag).append(", ");
         }
         return out.substring(0, out.length()-2);
-    }
-
-    private void setColor(String color){
-        System.out.println(color);
-    }
-
-    private void resetColor(){
-        System.out.println(RESET);
     }
 }
