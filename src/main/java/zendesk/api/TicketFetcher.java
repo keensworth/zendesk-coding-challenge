@@ -26,7 +26,7 @@ public class TicketFetcher {
 
     public Ticket[] fetchInitialTicketPage(){
         String response = zendeskAPI.makeGetRequest(INITIAL_TICKET_PAGE_REQUEST);
-        updateCursors(response);
+        updateMeta(response);
         Ticket[] tickets = JSONParser.parseTicketArrayString(response);
         fetchUsernamesFromIds(tickets);
         return tickets;
@@ -34,8 +34,7 @@ public class TicketFetcher {
 
     public Ticket[] fetchNextTicketPage(){
         String response = zendeskAPI.makeGetRequest(nextTicketPageRequest);
-        updateCursors(response);
-        hasMoreTickets = JSONParser.hasMoreTickets(response);
+        updateMeta(response);
         Ticket[] tickets = JSONParser.parseTicketArrayString(response);
         fetchUsernamesFromIds(tickets);
         return tickets;
@@ -43,7 +42,7 @@ public class TicketFetcher {
 
     public Ticket[] fetchPrevTicketPage(){
         String response = zendeskAPI.makeGetRequest(prevTicketPageRequest);
-        updateCursors(response);
+        updateMeta(response);
         Ticket[] tickets = JSONParser.parseTicketArrayString(response);
         fetchUsernamesFromIds(tickets);
         return tickets;
@@ -61,9 +60,10 @@ public class TicketFetcher {
         return hasMoreTickets;
     }
 
-    private void updateCursors(String response){
+    private void updateMeta(String response){
         nextTicketPageRequest = JSONParser.getNextTicketPageRequest(response);
         prevTicketPageRequest = JSONParser.getPrevTicketPageRequest(response);
+        hasMoreTickets = JSONParser.hasMoreTickets(response);
     }
 
     private void fetchUsernamesFromIds(Ticket... tickets){
