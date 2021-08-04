@@ -21,7 +21,7 @@ public class ConsoleController {
     }
 
     /**
-     * Prompt's the user on the command line for input
+     * Prompts the user on the command line for input
      *
      * @param prompt prompt for the user to respond to
      */
