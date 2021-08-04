@@ -7,7 +7,7 @@ Details of the response are given to the user - more detail for single-ticket vi
 ## Prerequisites
 
 - [Maven](https://maven.apache.org/download.cgi "Maven Download") 3.x (or greater) installed
-- [JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html "JDK Download") 14 (or grater) installed
+- [JDK](https://www.oracle.com/java/technologies/javase-jdk16-downloads.html "JDK Download") 14 (or greater) installed
 
 ## How to run
 
