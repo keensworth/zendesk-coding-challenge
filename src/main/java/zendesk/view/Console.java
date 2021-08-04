@@ -30,6 +30,8 @@ public class Console {
             "         /\\_____\\  \\ \\_____\\  \\ \\_\\\\'\\_\\    \\ \\_\\  \\ \\_\\  \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_____\\    \\ \\_\\    ",
             "         \\/_____/   \\/_____/   \\/_/ \\/_/     \\/_/   \\/_/   \\/_____/   \\/_/\\/_/   \\/_____/     \\/_/                        ",
             "",
+            "",
+            "",
             ""
     };
 
@@ -62,11 +64,12 @@ public class Console {
         at.addRule();
         row1.setTextAlignment(TextAlignment.CENTER);
         row2.setTextAlignment(TextAlignment.LEFT);
-        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(18).add(18).add(38).add(22).add(12));
+        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(14).add(18).add(42).add(22).add(12));
         System.out.println(ansi().a(at.render()));
     }
 
     public void printTicketPage(Ticket[] ticketPage){
+        long start = System.nanoTime();
         System.out.println(ansi().eraseScreen());
         AsciiTable at = new AsciiTable();
         at.addRule();
@@ -85,8 +88,10 @@ public class Console {
         }
 
         row1.setTextAlignment(TextAlignment.CENTER);
-        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(18).add(18).add(22).add(40));
+        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(14).add(32).add(22).add(40));
         System.out.println(ansi().a(at.render()));
+        long end = System.nanoTime();
+        System.out.println(ansi().a((end-start)/1000000000f) + " seconds to mak charts");
     }
 
     public void printBasicQuery(){
