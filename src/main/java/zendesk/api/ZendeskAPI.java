@@ -13,7 +13,6 @@ public class ZendeskAPI {
     private String hostURL;
 
     public String makeGetRequest(String request){
-        System.out.println("IN REQUEST: " + hostURL);
         try {
             StringBuilder result = new StringBuilder();
             java.net.URL url = new URL(hostURL + request);
@@ -42,9 +41,7 @@ public class ZendeskAPI {
 
     public void setCredentials(String configPath){
         try {
-            System.out.println("1");
             Scanner scanner = new Scanner(this.getClass().getResourceAsStream(configPath));
-            System.out.println("2");
             String email = "";
             String token = "";
             String subdomain = "";
@@ -59,7 +56,6 @@ public class ZendeskAPI {
             String rawAuthorization = email + "/token:" + token;
             this.encryptedAuth = Base64.getEncoder().encodeToString(rawAuthorization.getBytes());
             this.hostURL = "https://" + subdomain + ".zendesk.com";
-            System.out.println(hostURL);
         } catch (Exception e){
             System.out.println("config.properties not found!");
             e.printStackTrace();
