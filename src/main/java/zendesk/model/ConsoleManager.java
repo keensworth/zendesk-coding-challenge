@@ -109,14 +109,14 @@ public class ConsoleManager {
 
     public void viewAllTickets(){
         Ticket[] tickets = ticketManager.viewAllTickets();
-        //console.printTickets(tickets);
+        console.printTicketPage(tickets);
         currentState = FIRST_PAGE_QUERY_STATE;
     }
 
     public void nextPage(){
         Ticket[] tickets = ticketManager.getNextPage();
 
-        //console.printTicketPage(tickets);
+        console.printTicketPage(tickets);
 
         if (ticketManager.hasMoreTickets())
             currentState = PAGE_QUERY_STATE;
@@ -128,7 +128,7 @@ public class ConsoleManager {
     public void prevPage(){
         Ticket[] tickets = ticketManager.getPrevPage();
 
-        //console.printTicketPage(tickets);
+        console.printTicketPage(tickets);
 
         if (ticketManager.getPageNum() > 1)
             currentState = PAGE_QUERY_STATE;
