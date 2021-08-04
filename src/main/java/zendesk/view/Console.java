@@ -69,14 +69,12 @@ public class Console {
     }
 
     public void printTicketPage(Ticket[] ticketPage){
-        long start = System.nanoTime();
         System.out.println(ansi().eraseScreen());
         AsciiTable at = new AsciiTable();
         at.addRule();
         AT_Row row1 = at.addRow("ID", "Requester", "Subject", "Updated", "Tags");
         at.addRule();
 
-        System.out.println("Collecting information form tickets");
         for (Ticket ticket : ticketPage){
             AT_Row row = at.addRow(
                     ticket.id,
@@ -87,13 +85,9 @@ public class Console {
             at.addRule();
             row.setTextAlignment(TextAlignment.LEFT);
         }
-        System.out.println("Setting configs");
         row1.setTextAlignment(TextAlignment.CENTER);
         at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(14).add(32).add(22).add(40));
-        System.out.println("Rendering");
         System.out.println(ansi().a(at.render()));
-        long end = System.nanoTime();
-        System.out.println(ansi().a((end-start)/1000000000f) + " seconds to make charts");
     }
 
     public void printBasicQuery(){
