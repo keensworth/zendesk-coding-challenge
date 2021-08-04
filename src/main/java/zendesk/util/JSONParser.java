@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import zendesk.api.Ticket;
 
 import java.util.List;
@@ -26,14 +27,14 @@ public class JSONParser {
     }
 
     public static Ticket[] parseTicketArrayString(String ticketArrayString){
+
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
-            List<Ticket> ticketList = objectMapper.readValue(ticketArrayString, new TypeReference<>() {
-            });
-            Ticket[] ticketArray = new Ticket[ticketList.size()];
-            return ticketList.toArray(ticketArray);
+            JsonNode node = objectMapper.readTree(ticketArrayString).get("tickets");
+            Ticket[] tickets = objectMapper.convertValue(node, Ticket[].class);
+            return tickets;
         } catch (JsonProcessingException e){
             e.printStackTrace();
         }
