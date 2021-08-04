@@ -67,9 +67,11 @@ public class TicketFetcher {
     }
 
     private void fetchUsernamesFromIds(Ticket... tickets){
+        System.out.println("BINGUS");
         for (Ticket ticket : tickets){
             ticket.assigneeName = userFetcher.fetchNameFromId(ticket.assignee_id);
             ticket.requesterName = userFetcher.fetchNameFromId(ticket.requester_id);
         }
+        System.out.println("BUNGUS");
     }
 }
