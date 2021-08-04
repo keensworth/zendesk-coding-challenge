@@ -108,8 +108,11 @@ public class ConsoleManager {
     }
 
     public void viewAllTickets(){
+        System.out.println("Getting tickets from API");
         Ticket[] tickets = ticketManager.viewAllTickets();
+        System.out.println("Printing tickets");
         console.printTicketPage(tickets);
+        System.out.println("Printed tickets");
         currentState = FIRST_PAGE_QUERY_STATE;
     }
 
