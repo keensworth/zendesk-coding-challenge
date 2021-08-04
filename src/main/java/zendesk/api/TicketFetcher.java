@@ -72,6 +72,7 @@ public class TicketFetcher {
         ArrayList<Long> requesterIds = new ArrayList<>();
         for (Ticket ticket : tickets){
             requesterIds.add(ticket.requester_id);
+            System.out.println(ticket.requester_id);
         }
         String[] requesterNames = userFetcher.fetchNamesFromIds(requesterIds);
         for (int i = 0; i < tickets.length; i++){
