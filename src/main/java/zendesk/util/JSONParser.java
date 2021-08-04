@@ -27,13 +27,15 @@ public class JSONParser {
     }
 
     public static Ticket[] parseTicketArrayString(String ticketArrayString){
-
+        long start = System.nanoTime();
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
             JsonNode node = objectMapper.readTree(ticketArrayString).get("tickets");
             Ticket[] tickets = objectMapper.convertValue(node, Ticket[].class);
+            long end= System.nanoTime();
+            System.out.println((end-start)/1000000000f + " seconds to parse ticket array string");
             return tickets;
         } catch (JsonProcessingException e){
             e.printStackTrace();
