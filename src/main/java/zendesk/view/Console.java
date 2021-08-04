@@ -86,7 +86,7 @@ public class Console {
             row.setTextAlignment(TextAlignment.LEFT);
         }
         row1.setTextAlignment(TextAlignment.CENTER);
-        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(14).add(32).add(22).add(40));
+        at.getRenderer().setCWC(new CWC_FixedWidth().add(5).add(14).add(32).add(22).add(41));
         System.out.println(ansi().a(at.render()));
     }
 
