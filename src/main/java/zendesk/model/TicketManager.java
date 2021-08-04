@@ -86,7 +86,7 @@ public class TicketManager {
     /**
      * Calls upon TicketFetcher to see if there is another page of tickets available
      *
-     * @return
+     * @return boolean
      */
     public boolean hasMoreTickets(){
         return ticketFetcher.hasMoreTickets();
