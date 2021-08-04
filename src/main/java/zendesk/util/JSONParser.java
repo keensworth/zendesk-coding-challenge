@@ -103,7 +103,8 @@ public class JSONParser {
             ArrayList<String> names = new ArrayList<>();
 
             for (JsonNode subNode : node){
-                System.out.println(names.add(subNode.get("name").asText()));
+                System.out.println(subNode.get("name").asText());
+                names.add(subNode.get("name").asText());
             }
 
             String[] userNames = new String[names.size()];
